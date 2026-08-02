@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} - SignVoice{% endblock %}
+{% block content %}
+<div class="auth-page" style="min-height: 60vh;">
+  <div class="auth-card" style="text-align: center;">
+    <h1 style="font-size: 3rem; margin-bottom: 8px;">{{ code }}</h1>
+    <p class="subtitle">{{ message }}</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-block">Back to safety</a>
+  </div>
+</div>
+{% endblock %}

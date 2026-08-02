@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Live recognize - SignVoice{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Live recognition</h1>
+    <p>// Show a sign to the camera</p>
+  </div>
+  <div class="conn-status">
+    <span class="conn-dot" id="conn-dot"></span>
+    <span class="conn-label">Live</span>
+  </div>
+</div>
+
+<div class="video-wrap">
+  <video id="video" autoplay playsinline muted></video>
+  <div class="hand-indicator" id="hand-indicator"></div>
+  <div class="caption-bubble" id="caption-bubble"></div>
+</div>
+
+<div class="status-line" id="status-line">Starting camera…</div>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script type="module" src="{{ url_for('static', filename='js/recognize.js') }}"></script>
+{% endblock %}

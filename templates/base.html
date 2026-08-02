@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}SignVoice{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+{% if session.get('user_id') %}
+<nav class="topnav">
+  <div class="brand">
+    <span class="brand-mark"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+    SignVoice
+  </div>
+  <div class="nav-links">
+    <a href="{{ url_for('seal_pack_page') }}">Seal pack</a>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('add_gesture_page') }}">Add sign</a>
+    <a href="{{ url_for('recognize_page') }}">Live recognize</a>
+    <a href="{{ url_for('logout') }}">Log out</a>
+  </div>
+</nav>
+{% endif %}
+<main class="{% block main_class %}page{% endblock %}">
+{% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-heading">About</div>
+      <p class="footer-about-text">Hi, I'm Antonio — a developer. SignVoice is my first major project. If you have any suggestions, feel free to email me.</p>
+      <a href="mailto:antoniojohnoffical@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/antonio-john-b57014307" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/_antoniojohn_" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Work in progress</div>
+      <ul class="footer-list">
+        <li>SignVoice ASL — a full American Sign Language alphabet mode</li>
+        <li>More seals — an ever-expanding emoji pack</li>
+        <li>Practice mode — quiz yourself on your own registered signs</li>
+        <li>Richer two-hand sign support</li>
+        <li>Adjustable voice, pitch, and speaking rate for playback</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Legal</div>
+      <a href="{{ url_for('legal_page') }}">Privacy &amp; terms</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="brand-mark-footer"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+    SignVoice
+  </div>
+</footer>
+</body>
+</html>

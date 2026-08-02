@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Seal pack - SignVoice{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Seal pack</h1>
+    <p>// Every emoji a sign can wear</p>
+  </div>
+</div>
+
+<div class="seal-pack-section">
+  <div class="seal-pack">
+    {% for e in presets %}
+    <div class="seal-pack-item">{{ e }}</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

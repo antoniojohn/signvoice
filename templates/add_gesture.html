@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Add sign - SignVoice{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Register a new sign</h1>
+    <p>// Name it, seal it, then record a few samples</p>
+  </div>
+</div>
+
+<div class="seal-pack-section">
+  <div class="seal-pack-label">Available seals — not already used by one of your other signs</div>
+  <div class="seal-pack">
+    {% for e in available_presets %}
+    <div class="seal-pack-item">{{ e }}</div>
+    {% else %}
+    <div class="helper-text" style="margin:0;">Every seal is already in use — this sign may end up sharing one.</div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="form-card" id="step-details">
+  <label for="gesture_name">Sign name</label>
+  <input type="text" id="gesture_name" placeholder="e.g. Thumbs up">
+  <div class="helper-text">Just a label for you to recognize it in your dashboard.</div>
+
+  <label for="text_message">Text / message it means</label>
+  <input type="text" id="text_message" placeholder="e.g. I'm doing great!">
+  <div class="helper-text">This is what gets displayed, spoken aloud, and signed in cursive when recognized. A matching seal will be picked for it automatically — you'll see it on your dashboard once this sign is saved.</div>
+
+  <div class="center-actions">
+    <button class="btn-primary" id="continue-btn">Continue to camera →</button>
+  </div>
+</div>
+
+<div class="form-card" id="step-camera" style="display:none;">
+  <h3 id="sample-title" style="margin-top:0;"></h3>
+  <p class="helper-text">Hold your sign steady in front of the camera. Record 3 samples for best accuracy.</p>
+
+  <div class="video-wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <div class="hand-indicator" id="hand-indicator"></div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="status-line" id="status-line">Click "Record sample" and hold your sign.</div>
+  <div class="sample-counter" id="sample-counter">0 of 3 samples recorded</div>
+
+  <div class="center-actions">
+    <button class="btn-secondary" id="record-btn">Record sample</button>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary" id="finish-btn" style="display:none;">Finish →</a>
+  </div>
+</div>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+  const RECORD_FRAMES = {{ record_frames }};
+  const SAMPLES_NEEDED = 3;
+</script>
+<script type="module" src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}

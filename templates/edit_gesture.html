@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Edit sign - SignVoice{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Edit sign</h1>
+    <p>// Update the name, message, or seal</p>
+  </div>
+</div>
+
+<div class="form-card">
+  <form method="POST">
+    <label for="gesture_name">Sign name</label>
+    <input type="text" id="gesture_name" name="gesture_name" value="{{ gesture.gesture_name }}">
+
+    <label for="text_message">Text / message it means</label>
+    <input type="text" id="text_message" name="text_message" value="{{ gesture.text_message }}">
+
+    {% if error %}<div class="error-msg">{{ error }}</div>{% endif %}
+
+    <label>Seal</label>
+    <div class="seal-preview-row">
+      <div class="seal-preview" id="seal-preview">{{ gesture.emoji or "✨" }}</div>
+      <div class="helper-text" style="margin-top:0;">This is the current seal.</div>
+    </div>
+    <div class="emoji-picker" style="margin-top:12px;">
+      {% for e in presets %}
+      <button type="button" class="emoji-option{{ ' selected' if e == (gesture.emoji or '✨') else '' }}" data-emoji="{{ e }}">{{ e }}</button>
+      {% endfor %}
+    </div>
+    <input type="hidden" name="emoji" id="emoji-input" value="{{ gesture.emoji or '✨' }}">
+
+    <div class="center-actions">
+      <button type="submit" class="btn-primary">Save changes</button>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-secondary" style="display:inline-flex; align-items:center;">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.querySelectorAll('.emoji-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('seal-preview').textContent = btn.dataset.emoji;
+      document.getElementById('emoji-input').value = btn.dataset.emoji;
+      document.querySelectorAll('.emoji-option').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+  });
+</script>
+{% endblock %}

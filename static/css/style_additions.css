@@ -1,0 +1,90 @@
+
+/* ---------------------------------------------------- professional pass -- */
+
+.conn-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.conn-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--danger);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.conn-dot.online {
+  background: var(--accent-2);
+  box-shadow: 0 0 8px var(--accent-2);
+}
+
+/* Recognized captions keep the original accent styling; "unknown" gets a
+   distinct, calmer treatment so it reads as informational, not an error. */
+.caption-bubble.unknown {
+  border-color: var(--text-muted);
+  color: var(--text-muted);
+  background: rgba(18, 22, 42, 0.85);
+}
+
+.caption-bubble.recognized {
+  border-color: var(--accent);
+}
+
+/* Subtle entrance animation for gesture cards — makes the dashboard feel
+   alive without being distracting. */
+.gesture-card {
+  animation: fade-in-up 0.25s ease both;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading state for the camera view, shown via the existing status-line —
+   a small pulsing dot next to it makes "Starting camera…" feel active
+   rather than stuck. */
+.status-line.loading::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  margin-right: 8px;
+  animation: pulse 1.2s ease-in-out infinite;
+  vertical-align: middle;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Toast-style banner for sample_error / transient socket errors, if you
+   want to surface them visually instead of only in the browser console. */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--card);
+  border: 1px solid var(--danger);
+  color: var(--text);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

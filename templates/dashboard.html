@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - SignVoice{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Your signs</h1>
+    <p>// Signed in as {{ username }}</p>
+  </div>
+  <a href="{{ url_for('add_gesture_page') }}" class="btn btn-primary">+ Add new sign</a>
+</div>
+
+{% if gestures %}
+<div class="gesture-grid">
+  {% for g in gestures %}
+  <div class="gesture-card">
+    <div class="seal-row">
+      <div class="emoji-seal">{{ g.emoji or '✨' }}</div>
+      <div class="gname">{{ g.gesture_name }}</div>
+    </div>
+
+    <div class="signature-wrap">
+      <span class="signature-text" style="--reveal-delay: {{ [loop.index0 * 0.08, 0.4] | min }}s;">{{ g.text_message }}</span>
+    </div>
+
+    <div class="meta">{{ g.sample_count }} sample{{ 's' if g.sample_count != 1 else '' }} recorded</div>
+    <div class="card-actions">
+      <div class="card-action-wrap">
+        <a href="{{ url_for('edit_gesture_page', gesture_id=g.id) }}" class="btn btn-secondary card-action-btn">Edit</a>
+      </div>
+      <form class="card-action-wrap" action="{{ url_for('delete_gesture_route', gesture_id=g.id) }}" method="POST"
+            onsubmit="return confirm('Delete this sign?');">
+        <button type="submit" class="btn btn-danger card-action-btn">Delete</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <h3>No signs yet</h3>
+  <p>Register your first custom sign to start building your library.</p>
+  <a href="{{ url_for('add_gesture_page') }}">Add your first sign →</a>
+</div>
+{% endif %}
+{% endblock %}

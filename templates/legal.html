@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Privacy & terms - SignVoice{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Privacy &amp; terms</h1>
+    <p>// The short version</p>
+  </div>
+</div>
+
+<div class="form-card" style="text-align:left; max-width:720px;">
+  <h3 class="legal-section-title">Privacy</h3>
+  <p class="legal-copy">
+    SignVoice is a personal project, not a commercial product. Your webcam video
+    never leaves your browser — hand landmarks are extracted locally, and only
+    those landmark numbers (never video frames or images) are sent to the server
+    for matching. Registered signs, samples, and account details are stored in a
+    local database on whichever machine runs this app. Nothing here is sold,
+    shared with third parties, or used for advertising or analytics.
+  </p>
+
+  <h3 class="legal-section-title">Terms of use</h3>
+  <p class="legal-copy">
+    This project is provided as-is, for demonstration and educational purposes.
+    There's no uptime guarantee, and features may change, move, or break as the
+    project keeps evolving. Use it at your own discretion.
+  </p>
+
+  <div class="center-actions">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to dashboard</a>
+  </div>
+</div>
+{% endblock %}

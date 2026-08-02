@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Log in - SignVoice{% endblock %}
+{% block main_class %}auth-page{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Welcome back</h1>
+  <p class="subtitle">Log in to your custom sign library.</p>
+  <form method="POST">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required autofocus>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    {% if error %}<div class="error-msg">{{ error }}</div>{% endif %}
+    <button type="submit" class="btn-primary btn-block">Log in</button>
+  </form>
+  <div class="auth-footer">New here? <a href="{{ url_for('signup') }}">Create an account</a></div>
+</div>
+{% endblock %}
