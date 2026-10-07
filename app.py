@@ -449,4 +449,4 @@ def recognize_frame(data):
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=DEBUG_MATCH, host="0.0.0.0", port=5000)
+        socketio.run(app, debug=DEBUG_MATCH, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
